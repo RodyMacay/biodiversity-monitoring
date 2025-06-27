@@ -26,7 +26,7 @@ const locationSchema = new mongoose.Schema({
   },
   ecosystem: {
     type: String,
-    enum: ['Forest', 'Marine', 'Freshwater', 'Grassland', 'Desert', 'Tundra', 'Urban', 'Agricultural'],
+    enum: ["FOREST", "MARINE", "FRESHWATER", "GRASSLAND", "DESERT", "TUNDRA", "URBAN", "AGRICULTURAL"],
     required: true,
   },
   area: {
@@ -35,7 +35,7 @@ const locationSchema = new mongoose.Schema({
   },
   protectionStatus: {
     type: String,
-    enum: ['Protected', 'Partially Protected', 'Unprotected'],
+    enum: ["PROTECTED", "PARTIALLY_PROTECTED", "UNPROTECTED"],
     default: 'Unprotected',
   },
   country: {

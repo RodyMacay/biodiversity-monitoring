@@ -20,7 +20,7 @@ const seedMonitoringData = async () => {
         value: 15,
         unit: 'individuos/km',
         notes: 'Conteo en transecto matutino',
-        dataQuality: 'High',
+        dataQuality: 'HIGH',
         confidence: 85,
         weather: {
           temperature: 22,
@@ -37,7 +37,7 @@ const seedMonitoringData = async () => {
         value: 1.2,
         unit: 'μg/L',
         notes: 'Muestra de agua profunda',
-        dataQuality: 'Medium',
+        dataQuality: 'MEDIUM',
         confidence: 70,
         weather: {
           temperature: 26,
@@ -54,7 +54,7 @@ const seedMonitoringData = async () => {
         value: 0.5,
         unit: 'μg/L',
         notes: 'Muestra de ADN ambiental',
-        dataQuality: 'High',
+        dataQuality: 'HIGH',
         confidence: 90,
         weather: {
           temperature: 24,

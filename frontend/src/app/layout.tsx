@@ -19,8 +19,8 @@ export default function RootLayout({
       appearance={{
         baseTheme: undefined,
         variables: {
-          colorPrimary: '#16a34a', // green-600
-          colorText: '#111827', // gray-900
+          colorPrimary: '#16a34a', 
+          colorText: '#111827',
         },
         elements: {
           formButtonPrimary: 'bg-green-600 hover:bg-green-700 text-white',

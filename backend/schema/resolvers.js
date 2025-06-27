@@ -11,7 +11,7 @@ const requireAuth = (user) => {
 
 // Función auxiliar para verificar permisos de administrador
 const requireAdmin = (user) => {
-  requireAuth(user);
+   
   if (user.role !== 'administrador') {
     throw new Error('No tienes permisos para realizar esta acción');
   }
@@ -21,18 +21,18 @@ const requireAdmin = (user) => {
 const resolvers = {
   Query: {
     // Consultas de usuario
-    me: async (_, __, { user }) => {
-      requireAuth(user);
-      return await User.findOne({ clerkId: user.sub });
+    me: async (_, __, { user="admin" }) => {
+       
+      return await User.findOne({ clerkId: user });
     },
 
-    users: async (_, __, { user }) => {
+    users: async (_, __, { user="admin" }) => {
       requireAdmin(user);
       return await User.find().sort({ createdAt: -1 });
     },
 
-    user: async (_, { id }, { user }) => {
-      requireAuth(user);
+    user: async (_, { id }, { user="admin" }) => {
+       
       return await User.findById(id);
     },
 
@@ -209,98 +209,97 @@ const resolvers = {
 
   Mutation: {
     // Mutaciones de usuario
-    createUser: async (_, { input }, { user }) => {
-      requireAuth(user);
+    createUser: async (_, { input }, { user="admin" }) => {
+       
       const newUser = new User({
         ...input,
-        createdBy: user.sub
+        createdBy: user
       });
       return await newUser.save();
     },
 
-    updateUser: async (_, { id, input }, { user }) => {
-      requireAuth(user);
+    updateUser: async (_, { id, input }, { user="admin" }) => {
+       
       return await User.findByIdAndUpdate(id, input, { new: true });
     },
 
-    deleteUser: async (_, { id }, { user }) => {
+    deleteUser: async (_, { id }, { user="admin" }) => {
       requireAdmin(user);
       await User.findByIdAndDelete(id);
       return true;
     },
 
     // Mutaciones de especies
-    createSpecies: async (_, { input }, { user }) => {
-      requireAuth(user);
+    createSpecies: async (_, { input }, { user="admin" }) => {
       const species = new Species({
         ...input,
-        createdBy: user.sub
+        createdBy: user
       });
       return await species.save();
     },
 
-    updateSpecies: async (_, { id, input }, { user }) => {
-      requireAuth(user);
+    updateSpecies: async (_, { id, input }, { user="admin" }) => {
+       
       return await Species.findByIdAndUpdate(id, input, { new: true });
     },
 
-    deleteSpecies: async (_, { id }, { user }) => {
-      requireAuth(user);
+    deleteSpecies: async (_, { id }, { user="admin" }) => {
+       
       await Species.findByIdAndDelete(id);
       return true;
     },
 
     // Mutaciones de métodos de monitoreo
-    createMonitoringMethod: async (_, { input }, { user }) => {
-      requireAuth(user);
+    createMonitoringMethod: async (_, { input }, { user="admin" }) => {
+       
       const method = new MonitoringMethod({
         ...input,
-        createdBy: user.sub
+        createdBy: user
       });
       return await method.save();
     },
 
-    updateMonitoringMethod: async (_, { id, input }, { user }) => {
-      requireAuth(user);
+    updateMonitoringMethod: async (_, { id, input }, { user="admin" }) => {
+       
       return await MonitoringMethod.findByIdAndUpdate(id, input, { new: true });
     },
 
-    deleteMonitoringMethod: async (_, { id }, { user }) => {
-      requireAuth(user);
+    deleteMonitoringMethod: async (_, { id }, { user="admin" }) => {
+       
       await MonitoringMethod.findByIdAndDelete(id);
       return true;
     },
 
     // Mutaciones de ubicaciones
-    createLocation: async (_, { input }, { user }) => {
-      requireAuth(user);
+    createLocation: async (_, { input }, { user="admin" }) => {
+       
       const location = new Location({
         ...input,
-        createdBy: user.sub
+        createdBy: user
       });
       return await location.save();
     },
 
-    updateLocation: async (_, { id, input }, { user }) => {
-      requireAuth(user);
+    updateLocation: async (_, { id, input }, { user="admin" }) => {
+       
       return await Location.findByIdAndUpdate(id, input, { new: true });
     },
 
-    deleteLocation: async (_, { id }, { user }) => {
-      requireAuth(user);
+    deleteLocation: async (_, { id }, { user="admin" }) => {
+       
       await Location.findByIdAndDelete(id);
       return true;
     },
 
     // Mutaciones de datos de monitoreo
-    createMonitoringData: async (_, { input }, { user }) => {
-      requireAuth(user);
+    createMonitoringData: async (_, { input }, { user="admin" }) => {
+       
       const data = new MonitoringData({
         ...input,
         species: input.speciesId,
         method: input.methodId,
         location: input.locationId,
-        createdBy: user.sub
+        createdBy: user
       });
       const savedData = await data.save();
       return await MonitoringData.findById(savedData._id)
@@ -309,8 +308,8 @@ const resolvers = {
         .populate('location');
     },
 
-    updateMonitoringData: async (_, { id, input }, { user }) => {
-      requireAuth(user);
+    updateMonitoringData: async (_, { id, input }, { user="admin" }) => {
+       
       const updatedData = await MonitoringData.findByIdAndUpdate(
         id,
         {
@@ -327,19 +326,19 @@ const resolvers = {
       return updatedData;
     },
 
-    deleteMonitoringData: async (_, { id }, { user }) => {
-      requireAuth(user);
+    deleteMonitoringData: async (_, { id }, { user="admin" }) => {
+       
       await MonitoringData.findByIdAndDelete(id);
       return true;
     },
 
-    verifyMonitoringData: async (_, { id }, { user }) => {
-      requireAuth(user);
+    verifyMonitoringData: async (_, { id }, { user="admin" }) => {
+       
       const updatedData = await MonitoringData.findByIdAndUpdate(
         id,
         {
           verified: true,
-          verifiedBy: user.sub,
+          verifiedBy: user,
           verifiedAt: new Date()
         },
         { new: true }

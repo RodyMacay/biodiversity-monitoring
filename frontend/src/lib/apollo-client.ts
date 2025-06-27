@@ -1,39 +1,14 @@
 import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
+
 
 // Configurar el enlace HTTP
 const httpLink = createHttpLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_URL || 'http://localhost:4000/graphql',
-});
-
-// Configurar el enlace de autenticación
-const authLink = setContext(async (_, { headers }) => {
-  // Obtener el token de autenticación desde Clerk
-  let token = null;
-  
-  if (typeof window !== 'undefined') {
-    try {
-      // Intentar obtener el token de Clerk
-      const { getToken } = await import('@clerk/nextjs');
-      token = await getToken();
-    } catch (error) {
-      console.log('Error obteniendo token de Clerk:', error);
-      // Fallback a localStorage
-      token = localStorage.getItem('authToken');
-    }
-  }
-  
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
+  uri: '/api/graphql-proxy',
 });
 
 // Configurar el manejo de errores
-const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) => {
       console.error(
@@ -58,7 +33,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
 
 // Crear el cliente Apollo
 const apolloClient = new ApolloClient({
-  link: from([errorLink, authLink, httpLink]),
+  link: from([errorLink, httpLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

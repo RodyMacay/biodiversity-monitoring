@@ -5,8 +5,6 @@ import { Badge } from '@/components/ui/badge';
 import { 
   Leaf, 
   MapPin, 
-  BarChart3, 
-  Camera, 
   Microscope, 
   Satellite,
   Brain,

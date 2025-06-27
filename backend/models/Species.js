@@ -16,11 +16,21 @@ const speciesSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  conservationStatus: {
-    type: String,
-    enum: ['Least Concern', 'Near Threatened', 'Vulnerable', 'Endangered', 'Critically Endangered', 'Extinct in the Wild', 'Extinct', 'Data Deficient'],
-    default: 'Data Deficient',
-  },
+conservationStatus: {
+  type: String,
+  enum: [
+    'LEAST_CONCERN',
+    'NEAR_THREATENED',
+    'VULNERABLE',
+    'ENDANGERED',
+    'CRITICALLY_ENDANGERED',
+    'EXTINCT_IN_THE_WILD',
+    'EXTINCT',
+    'DATA_DEFICIENT'
+  ],
+  default: 'DATA_DEFICIENT',
+},
+
   imageUrl: {
     type: String,
     trim: true,

@@ -36,8 +36,8 @@ const monitoringDataSchema = new mongoose.Schema({
   },
   dataQuality: {
     type: String,
-    enum: ['High', 'Medium', 'Low'],
-    default: 'Medium',
+    enum: ["HIGH", "MEDIUM", "LOW"],
+    default: "MEDIUM",
   },
   confidence: {
     type: Number,

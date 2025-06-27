@@ -9,7 +9,7 @@ const monitoringMethodSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['GIS', 'Remote Sensing', 'Molecular', 'AI'],
+    enum: ["GIS" , "REMOTE_SENSING" , "MOLECULAR" ,"AI"]
   },
   description: {
     type: String,
@@ -25,11 +25,12 @@ const monitoringMethodSchema = new mongoose.Schema({
     min: 0,
     max: 100,
   },
-  costEfficiency: {
-    type: String,
-    enum: ['Low', 'Medium', 'High'],
-    default: 'Medium',
-  },
+costEfficiency: {
+  type: String,
+  enum: ['LOW', 'MEDIUM', 'HIGH'],
+  default: 'MEDIUM',
+},
+
   equipment: [{
     type: String,
     trim: true,

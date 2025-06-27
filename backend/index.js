@@ -15,7 +15,6 @@ async function startServer() {
   const app = express();
   const httpServer = http.createServer(app);
 
-  // Conectar a MongoDB
   try {
     await mongoose.connect('mongodb://127.0.0.1:27017/biodiversity');
     console.log('Conectado a MongoDB');
@@ -56,7 +55,6 @@ async function startServer() {
     res.json({ status: 'OK', message: 'Servidor funcionando correctamente' });
   });
 
-  // Ruta para poblar datos de ejemplo
   app.post('/seed-data', async (req, res) => {
     try {
       const seedData = require('./seedData');
@@ -72,9 +70,8 @@ async function startServer() {
   
   await new Promise((resolve) => httpServer.listen({ host: '0.0.0.0', port: PORT }, resolve));
   
-  console.log(`🚀 Servidor listo en http://0.0.0.0:${PORT}/`);
-  console.log(`📊 GraphQL disponible en http://0.0.0.0:${PORT}/graphql`);
-  console.log(`🌱 Poblar datos de ejemplo: POST http://0.0.0.0:${PORT}/seed-data`);
+  console.log(` Servidor listo en http://0.0.0.0:${PORT}/`);
+  console.log(` GraphQL disponible en http://0.0.0.0:${PORT}/graphql`);
 }
 
 startServer().catch((error) => {
