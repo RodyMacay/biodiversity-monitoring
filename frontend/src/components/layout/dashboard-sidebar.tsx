@@ -13,8 +13,10 @@ import {
   Settings,
   Users,
   Home,
-  LogOut
+  LogOut,
+  MapPlus
 } from 'lucide-react';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 const navigation = [
   {
@@ -27,11 +29,7 @@ const navigation = [
     href: '/dashboard/species',
     icon: Leaf,
   },
-  {
-    name: 'Métodos de Monitoreo',
-    href: '/dashboard/methods',
-    icon: Microscope,
-  },
+
   {
     name: 'Ubicaciones',
     href: '/dashboard/locations',
@@ -43,19 +41,9 @@ const navigation = [
     icon: Database,
   },
   {
-    name: 'Análisis',
-    href: '/dashboard/analytics',
-    icon: BarChart3,
-  },
-  {
-    name: 'Usuarios',
-    href: '/dashboard/users',
-    icon: Users,
-  },
-  {
-    name: 'Configuración',
-    href: '/dashboard/settings',
-    icon: Settings,
+    name: 'Localizaciones',
+    href: '/dashboard/ubications',
+    icon: MapPlus,
   },
 ];
 
@@ -65,6 +53,7 @@ interface DashboardSidebarProps {
 
 export function DashboardSidebar({ className }: DashboardSidebarProps) {
   const pathname = usePathname();
+  const { user } = useUser();
 
   return (
     <div className={cn('flex h-full w-64 flex-col bg-white border-r', className)}>
@@ -97,22 +86,11 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
           );
         })}
       </nav>
-
-      {/* User Profile */}
       <div className="border-t p-4">
         <div className="flex items-center space-x-3">
-          <Avatar className="w-10 h-10">
-            <AvatarFallback className="bg-green-100 text-green-700">
-              U
-            </AvatarFallback>
-          </Avatar>
+          <span className='text-sm font-medium text-gray-600'>{user?.firstName} {user?.lastName}</span>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
-              Usuario Demo
-            </p>
-            <p className="text-xs text-gray-500 truncate">
-              Investigador
-            </p>
+            <UserButton afterSignOutUrl="/" />
           </div>
         </div>
       </div>

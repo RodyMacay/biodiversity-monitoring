@@ -58,11 +58,7 @@ export default function HomePage() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/about">
-              <Button variant="outline" size="lg">
-                Conocer Más
-              </Button>
-            </Link>
+
           </div>
         </div>
       </section>
@@ -198,30 +194,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-green-600">
-        <div className="container mx-auto px-4 text-center">
-          <h3 className="text-3xl font-bold text-white mb-4">
-            Únete a la Conservación de la Biodiversidad
-          </h3>
-          <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Forma parte de la red global de investigadores y conservacionistas 
-            que utilizan tecnología avanzada para proteger nuestro planeta.
-          </p>
-          <div className="flex items-center justify-center space-x-4">
-            <Link href="/sign-up">
-              <Button size="lg" variant="secondary">
-                Comenzar Ahora
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-green-600">
-                Contactar
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">

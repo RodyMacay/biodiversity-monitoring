@@ -14,10 +14,21 @@ export interface Species {
 
 export interface MonitoringData {
   id: string;
-  species: Species;
+  species?: Species;
   dateRecorded?: string;
   count?: number;
   notes?: string;
+  location?: {
+    name: string;
+  };
+  dataQuality?: string;
+  date?: Date;
+  method?: {
+    id: string;
+    name: string;
+  };
+  quantity?: number;
+  unit?: string;
 }
 
 export interface Location {

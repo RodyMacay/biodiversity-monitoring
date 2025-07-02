@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { UserButton } from "@clerk/nextjs";
 import { 
   BarChart3, 
   Leaf, 
@@ -44,8 +45,8 @@ const navigation = [
     icon: Database,
   },
   {
-    name: 'Análisis',
-    href: '/dashboard/analytics',
+    name: 'Localizaciones',
+    href: '/dashboard/locations',
     icon: BarChart3,
   },
   {
@@ -114,6 +115,9 @@ export function DashboardSidebar({ className }: DashboardSidebarProps) {
             <p className="text-xs text-gray-500 truncate">
               Investigador
             </p>
+              <UserButton afterSignOutUrl={"/"}>
+                <LogOut/>
+              </UserButton>
           </div>
         </div>
       </div>

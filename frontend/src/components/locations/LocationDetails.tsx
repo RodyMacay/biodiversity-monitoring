@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { GET_LOCATION_DETAILS } from '@/graphql/queries';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -20,6 +19,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { conservationStatusOptions } from '@/constants';
+import { GET_LOCATION_DETAILS } from '@/graphql/queries';
 
 interface Species {
   id: string;
